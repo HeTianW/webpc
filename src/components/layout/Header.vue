@@ -88,8 +88,8 @@ export default {
                 this.$message.error('确认密码与新密码不一致！');
                 return;
               }
-              this.form.pwd = md5(this.form.pwd);
-              this.form.mpwd = md5(this.form.mpwd);
+              // this.form.pwd = md5(this.form.pwd);
+              // this.form.mpwd = md5(this.form.mpwd);
 
               let data = {
                 mpwd:this.form.mpwd,
