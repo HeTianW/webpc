@@ -283,7 +283,7 @@ export default {
         userId: row.id
       };
 
-      API.getUserInfo(data).then(result => {
+      API.getUserCertificationInfo(data).then(result => {
 
         console.log(result)
       });

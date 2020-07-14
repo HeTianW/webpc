@@ -337,6 +337,7 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
+      console.log(res)
       if(res.code == 0){
         this.form.coverImage = res.data;
         this.$message({

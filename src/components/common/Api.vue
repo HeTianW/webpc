@@ -51,13 +51,12 @@ export default new Vue({
                 return;
               }else{
                 let comment = response.data.msg;
-                this.$alert(comment, "提示信息", {
-                  confirmButtonText: "确定",
-                  type: "warning",
-                  center: true
-                });
-              }
-                
+                // this.$alert(comment, "提示信息", {
+                //   confirmButtonText: "确定",
+                //   type: "warning",
+                //   center: true
+                // });
+              }             
     　　　　　
               
               // resolve('error');
@@ -314,7 +313,22 @@ export default new Vue({
           });
       });
     },
-
+    getUserCertificationInfo(data) {
+      return new Promise((resolve, reject) => {
+        this.xhtp({
+          method: "post",
+          url: "/api/admin/ask/userCertificationInfo.do",
+          headers: { "XIANGYU-ACCESS-TOKEN": token },
+          data:data
+        })
+          .then(result => {
+            resolve(result);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    },
     getfriendInfo(data) {
       console.log(data);
       return new Promise((resolve, reject) => {
