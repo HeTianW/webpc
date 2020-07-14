@@ -73,7 +73,6 @@
 <script>
 import API from '@/components/common/Api'
 import Pagination from '@/components/element/Pagination'
-import md5 from 'js-md5'
 
 export default {
     components: { Pagination },
@@ -221,7 +220,7 @@ export default {
                         }
                         this.form = t;
                     }else{
-                        this.form.password = md5(this.form.password);
+                        this.form.password = this.form.password;
                     }
                     this.loading = true;
 
@@ -255,7 +254,7 @@ export default {
         ok(formName){
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.form2.pwd = md5(this.form2.pwd);
+                    this.form2.pwd = this.form2.pwd;
                     API.resetPwd(this.form2).then(result=> {
                         this.dialogPwdVisible = false;
                         this.$refs[formName].resetFields();

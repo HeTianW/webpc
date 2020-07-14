@@ -26,7 +26,6 @@
 
 <script>
 import API from '@/components/common/Api'
-import md5 from 'js-md5'
 
 export default {
   name: 'Login',
@@ -67,7 +66,6 @@ export default {
           this.loading = true;
           let data = {
             phone:this.loginInfo.userNo,
-            // pwd:md5(this.loginInfo.userPwd)
             pwd:this.loginInfo.userPwd
 
           };

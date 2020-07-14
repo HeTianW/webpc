@@ -36,7 +36,6 @@
 
 <script>
 import API from '@/components/common/Api'
-import md5 from 'js-md5'
 
 export default {
   name:'Header',
@@ -88,9 +87,7 @@ export default {
                 this.$message.error('确认密码与新密码不一致！');
                 return;
               }
-              // this.form.pwd = md5(this.form.pwd);
-              // this.form.mpwd = md5(this.form.mpwd);
-
+              
               let data = {
                 mpwd:this.form.mpwd,
                 pwd:this.form.pwd,
