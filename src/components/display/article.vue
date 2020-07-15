@@ -432,6 +432,9 @@ export default {
                 });
               return;
             }
+            if(this.form.coverImage.indexOf('=') >= 0){
+              this.form.coverImage = this.getUrl(this.form.coverImage);
+            }
             if(this.form.introduction == ''){
               this.$message({
                 message: '请上传文章内容',
@@ -511,7 +514,7 @@ export default {
               return respnse.url
             },
             methods: 'POST',  // 可选参数 图片上传方式  默认为post
-            // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
+            token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
             name: 'file',  // 可选参数 文件的参数名 默认为img
             size: 500,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
             accept: 'image/png, image/jpeg, image/jpg',  // 可选参数 可上传的图片格式

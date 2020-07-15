@@ -509,12 +509,11 @@ export default {
                 });
               return;
             }
-            console.log(this.form.coverImage)
             this.loading = true;
-            // if(this.form.coverImage.indexOf('=') >= 0){
-            //   this.form.coverImage = this.getUrl(this.form.coverImage);
-            // }
-            this.form.coverImage = this.getUrl(this.form.coverImage);
+            if(this.form.coverImage.indexOf('=') >= 0){
+              this.form.coverImage = this.getUrl(this.form.coverImage);
+            }
+            
 
             API.Special(this.form).then(result => {
               this.loading = false;
