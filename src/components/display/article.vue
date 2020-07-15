@@ -117,7 +117,8 @@
                 class="avatar-uploader"
                 action="/api/admin/ask/uploadFile.do" 
                 :show-file-list="false"
-                :on-success="handleAvatarSuccess" 
+                :on-success="handleAvatarSuccess"
+                :headers="myHeaders" 
                 :before-upload="beforeAvatarUpload">
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -162,6 +163,9 @@ export default {
       }
     };
     return {
+      myHeaders: {
+        "XIANGYU-ACCESS-TOKEN": sessionStorage.token
+      },
       pickerOptions: {
           disabledDate: (time) => {
             return time.getTime() < Date.now() - 8.64e7;
@@ -337,7 +341,6 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
-      console.log(res)
       if(res.code == 0){
         this.form.coverImage = res.data;
         this.$message({
@@ -504,6 +507,7 @@ export default {
             // 你必须把返回的数据中所包含的图片地址 return 回去
             res: (respnse) => {
                 // console.info(respnse.url);
+                console.log(response)
               return respnse.url
             },
             methods: 'POST',  // 可选参数 图片上传方式  默认为post

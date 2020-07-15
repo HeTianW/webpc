@@ -116,7 +116,8 @@
           class="avatar-uploader"
           action="/api/admin/ask/uploadFile.do" 
           :show-file-list="false"
-          :on-success="handleAvatarSuccess" 
+          :on-success="handleAvatarSuccess"
+          :headers="myHeaders" 
           :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -161,7 +162,8 @@ import Pagination from "@/components/element/Pagination";
 import API from "@/components/common/Api";
 export default {
   components: { Pagination,quillEditor,quillRedefine},
-  data() {
+  data() {    
+    
    var checkendTime = (rule,value,callback) => {
       var flag = this.$moment(value).isAfter(this.form.beginTime);
       if(flag){
@@ -170,7 +172,13 @@ export default {
         callback(new Error('结束日期不能小于开始日期'));
       }
     };
+    
+    
     return {
+      myHeaders: {
+        "XIANGYU-ACCESS-TOKEN": sessionStorage.token
+      },
+      
       pickerOptions: {
           disabledDate: (time) => {
             return time.getTime() < Date.now() - 8.64e7;
@@ -293,7 +301,9 @@ export default {
         this.imageUrl = '';
     },
     handleAvatarSuccess(res, file) {
+      console.log(file)
         this.imageUrl = URL.createObjectURL(file.raw);
+        
         this.form.coverImage = res.data;
         this.isUpload = true;
         if(res.code == 0){
@@ -323,7 +333,8 @@ export default {
           }
           if (!isLt2M) {
             this.$message.error('上传图片大小不能超过 2MB!');
-          }
+          }          
+    
           return type && isLt2M;
       },
  
@@ -491,10 +502,20 @@ export default {
     save(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-            this.loading = true;
-            if(this.form.coverImage.indexOf('=') >= 0){
-              this.form.coverImage = this.getUrl(this.form.coverImage);
+            if(this.form.coverImage == '' && this.imageUrl == ''){
+              this.$message({
+                message: '请上传封面图片',
+                type: 'warning'
+                });
+              return;
             }
+            console.log(this.form.coverImage)
+            this.loading = true;
+            // if(this.form.coverImage.indexOf('=') >= 0){
+            //   this.form.coverImage = this.getUrl(this.form.coverImage);
+            // }
+            this.form.coverImage = this.getUrl(this.form.coverImage);
+
             API.Special(this.form).then(result => {
               this.loading = false;
              if(result.data.code != 0){
@@ -551,10 +572,11 @@ export default {
             // 你必须把返回的数据中所包含的图片地址 return 回去
             res: (respnse) => {
                 // console.info(respnse.url);
+              console.log(response)
               return respnse.url
             },
             methods: 'POST',  // 可选参数 图片上传方式  默认为post
-            // token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
+            token: sessionStorage.token,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
             name: 'file',  // 可选参数 文件的参数名 默认为img
             size: 500,  // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
             accept: 'image/png, image/jpeg, image/jpg',  // 可选参数 可上传的图片格式
