@@ -43,7 +43,8 @@
     <el-dialog :visible.sync="dialogDetailVisible" width="50%" center>
          <div class="detail">
              <div class="up">
-                <img :src="detail.coverImage == null ? 'static/images/null.png' : detail.coverImage" />
+               <img :src="serverSrc+detail.coverImage"/>
+                <!-- <img :src="detail.coverImage == null ? 'static/images/null.png' : detail.coverImage" /> -->
                 <div class="tip">{{detail.title}}</div>
                 <div class="name">{{detail.presentorName}}<span>|</span>{{detail.presentorJob}}</div>
                 <div class="texts" v-html="detail.introduction">
@@ -163,6 +164,7 @@ export default {
       }
     };
     return {
+      serverSrc:this.GLOBAL.serverSrc,
       myHeaders: {
         "XIANGYU-ACCESS-TOKEN": sessionStorage.token
       },
@@ -324,6 +326,7 @@ export default {
         id:row.id
       };
       API.detailLook(data).then(result => {
+        console.log(result)
         this.detail = result.data.data;
       });
       this.getComment();

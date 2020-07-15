@@ -41,7 +41,7 @@
     <el-dialog :visible.sync="dialogDetailVisible" width="50%" center>
       <div class="detail" >
         <div class="up">
-          <img :src="detail.coverImage"/>
+          <img :src="serverSrc+detail.coverImage"/>
           <div class="tip">{{detail.title}}</div>
           <div class="name">
             {{detail.presentorName}}
@@ -175,6 +175,7 @@ export default {
     
     
     return {
+      serverSrc:this.GLOBAL.serverSrc,
       myHeaders: {
         "XIANGYU-ACCESS-TOKEN": sessionStorage.token
       },
@@ -403,6 +404,7 @@ export default {
         id: row.id
       };
       API.detailLook(data).then(result => {
+        console.log(result)
         this.detail = result.data.data;
       });
       this.lookComment();
