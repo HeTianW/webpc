@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="nav">
-      <div class="name">已加入的团队</div>
+      <span @click="back" style="font-size: 20px"><i class="el-icon-arrow-left"></i>返回App用户管理</span>
     </div>
     <div class="m_title">用户基本信息</div>
     <div class="detail">
@@ -26,6 +26,7 @@
 
       </div>
     </div>
+    <div class="m_title">加入的团队</div>
     <div>
       <el-table :data="tableData" style="width: 100%;" :default-sort = "{prop: 'publicer', order: 'descending'}">
         <el-table-column type="index" label="序号" ></el-table-column>
@@ -269,6 +270,9 @@
         this.getDetail();
         this.getDetails();
       },
+      back() {
+              this.$router.push({name: 'member', query: {userId: this.userId,}});
+      },
       handleSizeChange(val) {
         this.ps = val;
         // this.getDetails();
@@ -296,8 +300,6 @@
 
 
       getDetail() {
-        alert("9876");
-        alert(this.user_id);
         console.log(isNaN(this.user_id));
         let data = {
           hisid: this.user_id,

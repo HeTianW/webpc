@@ -1,6 +1,8 @@
 <<template xmlns:v-bind="http://www.w3.org/1999/xhtml">
   <div class="page">
-
+    <div class="nav">
+      <span @click="back" style="font-size: 20px"><i class="el-icon-arrow-left"></i>返回App用户管理</span>
+    </div>
     <div class="search">
       <el-input clearable v-model="name" placeholder="昵称" style="width:200px;margin-right:20px;"></el-input>
       <el-button type="primary" plain icon="el-icon-search" @click="search" style="margin-left:20px;"></el-button>
@@ -103,23 +105,18 @@
 
         this.$root.$router.push({name:'friendDetail',query:{user_id:row.user_id}});
 
-        /* let data = {
+        let data = {
            userId: row.id
          };
-         alert(row.id);
-         alert(1111);
-
-         API.getUserInfo(data).then(result => {
-
-           alert(result.data.data.nickname);
-          alert(result.data.code);
-
-           alert(result.data.msg);
-           */
+        
+         API.getUserInfo(data).then(result => {           
+         });
 
       },
 
-
+      back() {
+              this.$router.push({name: 'member', query: {userId: this.userId,}});
+      },
       // this.$root.$router.push({name:'memberDetail'});
       handleProhibit(row, type) {
         this.userId = row.id;

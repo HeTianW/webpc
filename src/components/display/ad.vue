@@ -42,9 +42,12 @@
                 class="avatar-uploader"
                 action="/api/admin/ask/uploadFile.do" 
                 :show-file-list="false"
+                :headers="myHeaders" 
                 :on-success="handleAvatarSuccess" 
                 :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <img v-if="imageUrl" :src="flag == 1 ?imageUrl:serverSrc+imageUrl" class="avatar">
+
+
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
@@ -66,6 +69,10 @@ export default {
     components: { Pagination },
     data(){
         return{
+            serverSrc:this.GLOBAL.serverSrc,
+            myHeaders: {
+                "XIANGYU-ACCESS-TOKEN": sessionStorage.token
+            },
             pn:1,
             ps:10,
             count:0,

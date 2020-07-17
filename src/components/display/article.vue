@@ -121,7 +121,7 @@
                 :on-success="handleAvatarSuccess"
                 :headers="myHeaders" 
                 :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <img v-if="imageUrl" :src="flag == 1 ?imageUrl:serverSrc+imageUrl" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
