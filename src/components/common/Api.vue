@@ -40,7 +40,11 @@ export default new Vue({
           .then(response => {
             console.log(response);
             if (response.data.code === 0) {
-              
+              this.$alert(comment, "提示信息", {
+                  confirmButtonText: "确定",
+                  type: "success",
+                  center: true
+                });
             } else {
               
               if(response.data.code == 1){
@@ -51,11 +55,11 @@ export default new Vue({
                 return;
               }else{
                 let comment = response.data.msg;
-                // this.$alert(comment, "提示信息", {
-                //   confirmButtonText: "确定",
-                //   type: "warning",
-                //   center: true
-                // });
+                this.$alert(comment, "提示信息", {
+                  confirmButtonText: "确定",
+                  type: "warning",
+                  center: true
+                });
               }             
     　　　　　
               
@@ -368,6 +372,22 @@ export default new Vue({
         this.xhtp({
           method: "post",
           url: "/api/admin/goods/deleteGoods.do",
+          headers: { "XIANGYU-ACCESS-TOKEN": token },
+          data: data
+        })
+          .then(result => {
+            resolve(result);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    },
+    offselfgoods(data){
+      return new Promise((resolve, reject) => {
+        this.xhtp({
+          method: "post",
+          url: "/api/admin/goods/offSelfGoods.do",
           headers: { "XIANGYU-ACCESS-TOKEN": token },
           data: data
         })

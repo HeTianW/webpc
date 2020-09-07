@@ -196,7 +196,7 @@ this.count = result.data.data.count;
       let data = {
         goodsId:row.id
       };
-      API.delgoods(data).then(result => {
+      API.offselfgoods(data).then(result => {
         this.getDetails();
       });
     }).catch(_ => {});

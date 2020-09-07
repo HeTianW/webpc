@@ -6,8 +6,8 @@
 
 // const serverSrc="https://weixin.univmeet.cn/xiangyu";
 // const serverSrc2="https://weixin.univmeet.cn/xiangyu/";
-const serverSrc="http://maplelala.club:8081/xiangyuu";
-const serverSrc2="http://maplelala.club:8081/xiangyuu/";
+const serverSrc="http://maplelala.club:8081/xiangyu";
+const serverSrc2="http://maplelala.club:8081/xiangyu/";
 // const serverSrc="http://47.103.11.8:8088/xiangyu";
 const host = window.location.host;
   export default

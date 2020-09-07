@@ -16,7 +16,7 @@ module.exports = {
         // target: 'https://47.100.77.86:8080/xiangyu',
 
         // target: 'https://weixin.univmeet.cn/xiangyu',
-        target: 'http://maplelala.club:8081/xiangyuu',
+        target: 'http://maplelala.club:8081/xiangyu',
         // target: 'http://localhost:8080/xiangyu_war',
         changeOrigin: true,
         pathRewrite: {  
