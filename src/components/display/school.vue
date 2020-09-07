@@ -29,7 +29,7 @@
         </span>
     </el-dialog>
 
-      <el-dialog title="设置权限" :visible.sync="dialogAuthVisible" width="50%" center>
+      <el-dialog :show-close="false" :close-on-click-modal="false" title="设置权限" :visible.sync="dialogAuthVisible" width="50%" center>
         <span slot="footer" >
             <el-tree ref="tree" :data="authlist" show-checkbox node-key="id" :props="defaultProps"></el-tree>
         </span>
@@ -67,6 +67,7 @@ export default {
             count:0,
             flag:'',
             dialogVisible:false,
+            dialogAuthVisible:false,
             tableData: [],
             imageUrl:'',
             loading:false,
@@ -136,6 +137,9 @@ export default {
         cancel(formName){
             this.dialogVisible = false;
             this.$refs[formName].resetFields();
+        },
+        remove(){
+            this.dialogAuthVisible = false;
         },
         handleDel(index,row){
             this.$confirm("此操作将永久删除, 是否继续？", "提示", {

@@ -1,5 +1,8 @@
 <template>
   <div class="page">
+    <div class="nav">
+      <span @click="back" style="font-size: 20px"><i class="el-icon-arrow-left"></i>返回商品管理</span>
+    </div>
   <div class="search">
     <div>
       <el-input  placeholder="关键字" v-model="name" clearable="" style="width:200px;margin-right:20px;"></el-input>
@@ -106,6 +109,9 @@
           this.ps = val;
           this.getList();
         },
+        back() {
+              this.$router.push({name: 'goods'});
+      },
         search() {
           this.pn = 1;
           this.getList();

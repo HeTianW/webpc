@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="nav">
-      <span @click="back" style="font-size: 20px"><i class="el-icon-arrow-left"></i>返回App用户管理</span>
+      <span @click="back" style="font-size: 20px"><i class="el-icon-arrow-left"></i>返回交友模块管理</span>
     </div>
     <div class="m_title">用户基本信息</div>
     <div class="detail">
@@ -271,7 +271,7 @@
         this.getDetails();
       },
       back() {
-              this.$router.push({name: 'member', query: {userId: this.userId,}});
+              this.$router.push({name: 'friend', query: {userId: this.userId,}});
       },
       handleSizeChange(val) {
         this.ps = val;

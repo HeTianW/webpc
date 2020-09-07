@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <button @click="jump">商品标签管理</button>
     <div class="search">
       <el-input clearable v-model="name" placeholder="标签" style="width:200px;margin-right:20px;"></el-input>
         <el-option v-for="item in school" :key="item.id" :label="item.value" :value="item.value"></el-option>
@@ -21,6 +20,8 @@
       <el-button type="primary" plain icon="el-icon-search" @click="search" style="margin-left:20px;"></el-button>
       <!-- <el-button type="primary" >导入</el-button>
       <el-button type="primary" >导出</el-button> -->
+      <el-button type="primary" @click="jump">商品标签管理</el-button>
+
     </div>
 
     <el-table :data="tableData"style="width: 100%" header-cell-class-name="header-cell-color" v-loading="listLoading">
@@ -63,8 +64,10 @@
         </div>
       </div>
     </el-dialog>
-
+    <Pagination :pageCurrent="pn" v-on:refreshCurrentChange="refreshCurrentChange" v-on:refreshSizeChange="refreshSizeChange" :count="count">
+    </Pagination>
   </div>
+  
 
 </template>
 
@@ -93,7 +96,6 @@ startTime: '', //  	开始时间(非必填，查询时传入)
 endTime: '', //    	结束时间(非必填，查询时传入)
 phone:'',
 name:'',
-  type:1,
   labels:'',
   price:'',
 dialogDetailVisible: false,
@@ -129,7 +131,7 @@ methods: {
 
 refreshCurrentChange(val) {
 this.pn = val;
-this.type=1;
+this.type = this.type;
 // this.getList();
   this.getDetails();
 
@@ -137,7 +139,7 @@ this.type=1;
 },
 refreshSizeChange(val) {
 this.pn = 1;
-this.type=1;
+this.type = this.type;
 this.ps = val;
 //this.getList();
   this.getDetails();
@@ -232,7 +234,7 @@ this.count = result.data.data.count;
     API.goodsInfo(data).then(result => {
 
       this.tableData = result.data.data.list;
-      // this.count = result.data.data.count;
+      this.count = result.data.data.count;
 
       //  this.detail.logoImage = this.detail.logoImage;
     });
@@ -279,7 +281,7 @@ alert(result.data.msg);
 
 
 created() {
-  this.type=1;
+  this.type= this.type;
   this.userId = Number(this.$route.query.userId);
 this.getDetails();
 /* if (a == 1) {
